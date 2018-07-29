@@ -12,6 +12,12 @@ class Album extends Component {
         this.state = {
             album: album
         };
+
+            function trackNumber(arr){
+                for (var i=0; i < arr.length; i++) {
+                    console.log(arr[i]);
+                }
+            }
     }
     
     render() {
@@ -32,6 +38,11 @@ class Album extends Component {
                         <col id="song-duration-column" />
                     </colgroup>
                     <tbody>
+                        { 
+                            this.state.album.songs.map( (song, index) =>
+                                <tr key={index.id} trackNumber={this.trackNumber()} > {song.title} {song.duration} seconds</tr>
+                            )
+                        }
                     </tbody>
                 </table>
             </section>
