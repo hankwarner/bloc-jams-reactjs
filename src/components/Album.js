@@ -42,6 +42,14 @@ class Album extends Component {
                 this.play();
             }
         }
+
+        playButton() {
+            console.log("Hello World");
+            var display = document.getElementsByClassName('song-number');
+            display.innerHTML = "";
+            var foo = document.createElement('td');
+            foo.innerHTML = "<span className='arrow-dropright'> </span>";
+        }
     
     render() {
         return (
@@ -61,10 +69,9 @@ class Album extends Component {
                         <col id="song-duration-column" />
                     </colgroup>
                     <tbody>
-                        <span className="arrow-dropright"></span>
                         { 
                             this.state.album.songs.map( (song, index) =>
-                                <tr className="song" key={index.id} onClick={() => this.handleSongClick(song)}> <span className="arrow-dropright"> </span> {index + 1} {song.title} {song.duration} seconds</tr>
+                                <tr className="song" key={index.id} onClick={() => this.handleSongClick(song)}> <td className="song-number" onMouseEnter={() => this.playButton()}>{index + 1}</td> {song.title} {song.duration} seconds</tr>
                             )
                         }
                     </tbody>
