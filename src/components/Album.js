@@ -12,7 +12,8 @@ class Album extends Component {
         this.state = {
             album: album,
             currentSong: album.songs[0],
-            isPlaying: false
+            isPlaying: false,
+            isHover: false
         };
 
         this.audioElement = document.createElement('audio');
@@ -43,12 +44,19 @@ class Album extends Component {
             }
         }
 
+        isHovered() {
+            console.log('isHovered working');
+            this.setState({ isHover: true });
+        }
+
         playButton() {
-            console.log("Hello World");
-            var display = document.getElementsByClassName('song-number');
-            display.innerHTML = "";
-            var foo = document.createElement('td');
-            foo.innerHTML = "<span className='arrow-dropright'> </span>";
+            console.log('playButton start');
+            const isMouseHovered = this.state.isHover
+            if (isMouseHovered) {
+                return <span className="ion-play"> </span>;
+            } else {
+                console.log('playButton function is working');
+            }
         }
     
     render() {
@@ -71,7 +79,7 @@ class Album extends Component {
                     <tbody>
                         { 
                             this.state.album.songs.map( (song, index) =>
-                                <tr className="song" key={index.id} onClick={() => this.handleSongClick(song)}> <td className="song-number" onMouseEnter={() => this.playButton()}>{index + 1}</td> {song.title} {song.duration} seconds</tr>
+                                <tr className="song" key={index.id} onClick={() => this.handleSongClick(song)}> <td onMouseEnter={() => this.isHovered()}>{index + 1}</td> {song.title} {song.duration} seconds</tr>
                             )
                         }
                     </tbody>
