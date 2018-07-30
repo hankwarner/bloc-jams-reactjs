@@ -61,9 +61,10 @@ class Album extends Component {
                         <col id="song-duration-column" />
                     </colgroup>
                     <tbody>
+                        <span className="arrow-dropright"></span>
                         { 
                             this.state.album.songs.map( (song, index) =>
-                                <tr className="song" key={index.id} onClick={() => this.handleSongClick(song)}> {index + 1} {song.title} {song.duration} seconds</tr>
+                                <tr className="song" key={index.id} onClick={() => this.handleSongClick(song)}> <span className="arrow-dropright"> </span> {index + 1} {song.title} {song.duration} seconds</tr>
                             )
                         }
                     </tbody>
