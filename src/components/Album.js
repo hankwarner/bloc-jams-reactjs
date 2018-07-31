@@ -43,34 +43,6 @@ class Album extends Component {
                 this.play();
             }
         }
-
-        isHovered() {
-            console.log('isHovered working');
-            this.setState({ isHover: true });
-            console.log(this.state.isHover);
-        }
-
-        playButton() {
-            if (this.state.isHover === true) {
-                return <span className="ion-play"> </span>;
-            } else {
-                return <div></div>;
-            }
-        }
-
-        isNotHovered() {
-            console.log('isNotHovered is workign');
-            this.setState({ isHover: false });
-            console.log(this.state.isHover);
-        }
-
-        trackNumber(index) {
-            if (this.state.isHover === false) {
-                return <span>{index + 1}</span>;
-            } else {
-                console.log('trackNumber not working');
-            }
-        }
     
     render() {        
         return (
@@ -92,10 +64,18 @@ class Album extends Component {
                     <tbody>
                         { 
                             this.state.album.songs.map( (song, index) =>
-                                <tr className="song" key={index.id} onClick={() => this.handleSongClick(song)}> 
-                                    <td onMouseEnter={() => this.isHovered()} onMouseLeave={() => this.isNotHovered()}> {this.playButton()} {this.trackNumber(index)}</td> 
-                                    <td>{song.title}</td> 
-                                    <td>{song.duration} seconds</td>
+                                <tr className="song" key={index.id} 
+                                onClick={() => this.handleSongClick(song)} 
+                                onMouseEnter={() => this.setState({ isHover: index + 1 })} 
+                                onMouseLeave={() => this.setState({ isHover: false })}> 
+                                    <td className='song-actions'>
+                                            {this.state.currentSong === song.title ?
+                                                (<span className={this.state.isPlaying ? "ion-pause" : "ion-play"} />) :
+                                                this.state.isHover === index + 1 ? (<span className="ion-play" />) :
+                                                (<span className="song-number">{index + 1}</span>)}
+                                    </td>
+                                    <td className='song-title'>{song.title}</td> 
+                                    <td className='song-duration'>{song.duration} seconds</td>
                                 </tr>
                             )
                         }
