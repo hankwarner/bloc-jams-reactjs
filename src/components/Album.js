@@ -69,7 +69,7 @@ class Album extends Component {
                                 onMouseEnter={() => this.setState({ isHover: index + 1 })} 
                                 onMouseLeave={() => this.setState({ isHover: false })}> 
                                     <td className='song-actions'>
-                                            {this.state.currentSong === song.title ?
+                                            {this.state.currentSong === song ?
                                                 (<span className={this.state.isPlaying ? "ion-pause" : "ion-play"} />) :
                                                 this.state.isHover === index + 1 ? (<span className="ion-play" />) :
                                                 (<span className="song-number">{index + 1}</span>)}
