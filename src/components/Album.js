@@ -64,15 +64,15 @@ class Album extends Component {
             console.log(this.state.isHover);
         }
 
-        trackNumber() {
+        trackNumber(index) {
             if (this.state.isHover === false) {
-                return <div></div>;
+                return <span>{index + 1}</span>;
             } else {
                 console.log('trackNumber not working');
             }
         }
     
-    render() {
+    render() {        
         return (
             <section className="album">
                 <section id="album-info">
@@ -92,7 +92,11 @@ class Album extends Component {
                     <tbody>
                         { 
                             this.state.album.songs.map( (song, index) =>
-                                <tr className="song" key={index.id} onClick={() => this.handleSongClick(song)}> <td onMouseEnter={() => this.isHovered()} onMouseLeave={() => this.isNotHovered() }>{index + 1}</td> {this.playButton()} {this.trackNumber()} {song.title} {song.duration} seconds</tr>
+                                <tr className="song" key={index.id} onClick={() => this.handleSongClick(song)}> 
+                                    <td onMouseEnter={() => this.isHovered()} onMouseLeave={() => this.isNotHovered()}> {this.playButton()} {this.trackNumber(index)}</td> 
+                                    <td>{song.title}</td> 
+                                    <td>{song.duration} seconds</td>
+                                </tr>
                             )
                         }
                     </tbody>
