@@ -47,15 +47,14 @@ class Album extends Component {
         isHovered() {
             console.log('isHovered working');
             this.setState({ isHover: true });
+            console.log(this.state.isHover);
         }
 
         playButton() {
-            console.log('playButton start');
-            const isMouseHovered = this.state.isHover
-            if (isMouseHovered) {
+            if (this.state.isHover === true) {
                 return <span className="ion-play"> </span>;
             } else {
-                console.log('playButton function is working');
+                console.log('not working right');
             }
         }
     
@@ -79,7 +78,7 @@ class Album extends Component {
                     <tbody>
                         { 
                             this.state.album.songs.map( (song, index) =>
-                                <tr className="song" key={index.id} onClick={() => this.handleSongClick(song)}> <td onMouseEnter={() => this.isHovered()}>{index + 1}</td> {song.title} {song.duration} seconds</tr>
+                                <tr className="song" key={index.id} onClick={() => this.handleSongClick(song)}> <td onMouseEnter={() => this.isHovered()}>{index + 1}</td> {this.playButton()} {song.title} {song.duration} seconds</tr>
                             )
                         }
                     </tbody>
