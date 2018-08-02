@@ -13,15 +13,41 @@ class Album extends Component {
         this.state = {
             album: album,
             currentSong: album.songs[0],
+            currentTime: 0,
+            duration: album.songs[0].duration,
             isPlaying: false,
+<<<<<<< HEAD
             hoveredSong: false,
             currentTime: 0,
             duration: album.songs[0].duration
+=======
+            hoveredSong: false
+>>>>>>> checkpoint-9-range-inputs
         };
 
         this.audioElement = document.createElement('audio');
         this.audioElement.src = album.songs[0].audioSrc;
-    }
+        }
+
+        componentDidMount() {
+            this.eventListeners = {
+                timeupdate: e => {
+                    this.setState({ currentTime: this.audioElement.currentTime });
+                },
+                durationchange: e => {
+                    this.setState({ duration: this.audioElement.duration });
+                }
+            };
+            this.audioElement.addEventListener('timeupdate', this.eventListeners.timeupdate);
+            this.audioElement.addEventListener('durationchange', this.eventListeners.durationchange);
+        }
+
+        componentWillUnmount () {
+            this.audioElement.src = null;
+            this.audioElement.removeEventListener('timeupdate', this.eventListeners.timeupdate);
+            this.audioElement.removeEventListener('durationchange', this.eventListeners.durationchange);
+        }
+
         play() {
             this.audioElement.play();
             this.setState({ isPlaying: true });
@@ -63,6 +89,7 @@ class Album extends Component {
             this.play();
         }
 
+<<<<<<< HEAD
             componentDidMonut () {
                 this.addEventListeners = {
                     timeupdate: e => {
@@ -80,6 +107,13 @@ class Album extends Component {
                 this.audioElement.src = null;
                 this.audioElement = null;
             }
+=======
+        handleTimeChange(e) {
+            const newTime = this.audioElement.duration * e.target.value;
+            this.audioElement.currentTime = newTime;
+            this.setState({ currentTime: newTime });
+        }
+>>>>>>> checkpoint-9-range-inputs
     
     render() {        
         return (
@@ -108,7 +142,11 @@ class Album extends Component {
                                     <td className='song-actions'>
                                             {this.state.currentSong === song ?
                                                 (<span className={this.state.isPlaying ? "ion-pause" : "ion-play"} />) :
+<<<<<<< HEAD
                                                 this.state.hoveredSong === song ? (<span className="ion-play" />) :
+=======
+                                                this.state.hoveredSong === index + 1 ? (<span className="ion-play" />) :
+>>>>>>> checkpoint-9-range-inputs
                                                 (<span className="song-number">{index + 1}</span>)}
                                     </td>
                                     <td className='song-title'>{song.title}</td> 
@@ -121,10 +159,16 @@ class Album extends Component {
                 <PlayerBar 
                     isPlaying={this.state.isPlaying} 
                     currentSong={this.state.currentSong}
+<<<<<<< HEAD
                     currentTime={this.audioElement.currentTime} 
+=======
+                    currentTime={this.audioElement.currentTime}
+                    duration={this.audioElement.duration}
+>>>>>>> checkpoint-9-range-inputs
                     handleSongClick={() => this.handleSongClick(this.state.currentSong)}
                     handlePrevClick={() => this.handlePrevClick()}
                     handleNextClick={() => this.handleNextClick()}
+                    handleTimeChange={(e) => this.handleTimeChange(e)}
                 />
             </section>
         );
