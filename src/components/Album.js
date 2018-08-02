@@ -13,13 +13,35 @@ class Album extends Component {
         this.state = {
             album: album,
             currentSong: album.songs[0],
+            currentTime: 0,
+            duration: album.songs[0].duration,
             isPlaying: false,
-            isHover: false
+            hoveredSong: false
         };
 
         this.audioElement = document.createElement('audio');
         this.audioElement.src = album.songs[0].audioSrc;
-    }
+        }
+
+        componentDidMount() {
+            this.eventListeners = {
+                timeupdate: e => {
+                    this.setState({ currentTime: this.audioElement.currentTime });
+                },
+                durationchange: e => {
+                    this.setState({ duration: this.audioElement.duration });
+                }
+            };
+            this.audioElement.addEventListener('timeupdate', this.eventListeners.timeupdate);
+            this.audioElement.addEventListener('durationchange', this.eventListeners.durationchange);
+        }
+
+        componentWillUnmount () {
+            this.audioElement.src = null;
+            this.audioElement.removeEventListener('timeupdate', this.eventListeners.timeupdate);
+            this.audioElement.removeEventListener('durationchange', this.eventListeners.durationchange);
+        }
+
         play() {
             this.audioElement.play();
             this.setState({ isPlaying: true });
@@ -60,6 +82,12 @@ class Album extends Component {
             this.setSong(newSong);
             this.play();
         }
+
+        handleTimeChange(e) {
+            const newTime = this.audioElement.duration * e.target.value;
+            this.audioElement.currentTime = newTime;
+            this.setState({ currentTime: newTime });
+        }
     
     render() {        
         return (
@@ -81,14 +109,14 @@ class Album extends Component {
                     <tbody>
                         { 
                             this.state.album.songs.map( (song, index) =>
-                                <tr className="song" key={index.id} 
+                                <tr className="song" key={index} 
                                 onClick={() => this.handleSongClick(song)} 
-                                onMouseEnter={() => this.setState({ isHover: index + 1 })} 
-                                onMouseLeave={() => this.setState({ isHover: false })}> 
+                                onMouseEnter={() => this.setState({ hoveredSong: song })} 
+                                onMouseLeave={() => this.setState({ hoveredSong: null })}> 
                                     <td className='song-actions'>
                                             {this.state.currentSong === song ?
                                                 (<span className={this.state.isPlaying ? "ion-pause" : "ion-play"} />) :
-                                                this.state.isHover === index + 1 ? (<span className="ion-play" />) :
+                                                this.state.hoveredSong === index + 1 ? (<span className="ion-play" />) :
                                                 (<span className="song-number">{index + 1}</span>)}
                                     </td>
                                     <td className='song-title'>{song.title}</td> 
@@ -100,10 +128,13 @@ class Album extends Component {
                 </table>
                 <PlayerBar 
                     isPlaying={this.state.isPlaying} 
-                    currentSong={this.state.currentSong} 
+                    currentSong={this.state.currentSong}
+                    currentTime={this.audioElement.currentTime}
+                    duration={this.audioElement.duration}
                     handleSongClick={() => this.handleSongClick(this.state.currentSong)}
                     handlePrevClick={() => this.handlePrevClick()}
                     handleNextClick={() => this.handleNextClick()}
+                    handleTimeChange={(e) => this.handleTimeChange(e)}
                 />
             </section>
         );
