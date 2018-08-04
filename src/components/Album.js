@@ -71,7 +71,7 @@ class Album extends Component {
             var seconds = sec_num - (hours * 3600) - (minutes * 60);
             var secondsFormatted = (seconds < 10) ? "0"+seconds : seconds;
 
-            if (minutes === NaN || seconds === NaN) {
+            if (isNaN(minutes) || isNaN(seconds)) {
                 return "-:--";
             } else {
                 return minutesFormatted+":"+secondsFormatted;
