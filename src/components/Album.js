@@ -127,7 +127,7 @@ class Album extends Component {
                         <div id="release-info">{this.state.album.releaseInfo}</div>
                     </div>
                 </section>
-                <table id="song-list">
+                <table id="song-list" className="mdl-data-table mdl-js-data-table">
                     <colgroup>
                         <col id="song-number-column" />
                         <col id="song-title-column" />
@@ -140,14 +140,14 @@ class Album extends Component {
                                 onClick={() => this.handleSongClick(song)} 
                                 onMouseEnter={() => this.setState({ hoveredSong: song })} 
                                 onMouseLeave={() => this.setState({ hoveredSong: null })}> 
-                                    <td className='song-actions'>
+                                    <td className='song-actions mdl-data-table__cell--non-numeric'>
                                             {this.state.currentSong === song ?
                                                 (<span className={this.state.isPlaying ? "ion-pause" : "ion-play"} />) :
                                                 this.state.hoveredSong === song ? (<span className="ion-play" />) :
                                                 (<span className="song-number">{index + 1}</span>)}
                                     </td>
-                                    <td className='song-title'>{song.title}</td> 
-                                    <td className='song-duration'>{song.duration} seconds</td>
+                                    <td className='song-title mdl-data-table__cell--non-numeric'>{song.title}</td> 
+                                    <td className='song-duration mdl-data-table__cell--non-numeric'>{this.formatTime(song.duration)}</td>
                                 </tr>
                             )
                         }
