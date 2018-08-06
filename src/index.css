@@ -1,5 +1,135 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+.hero-title {
+  height: 15%;
+  width: 30%;
+  margin: auto;
+}
+
+.headphones-photo {
+  height: 400px;
+  width: 40%;
+  margin-left: 440px;
+  padding: 10px;
+}
+
+.point {
+  width: 400px;
+  float: left;
+  margin-right: 50px;
+  margin-left: 50px;
+  text-align: center;
+}
+
+.point-title {
+  font-size: 23pt;
+}
+
+/*
+Library component styles
+*/
+.library-albums {
+  margin-left: 200px;
+  display: inline;
+}
+
+.album-block {
+  width: 50%;
+  margin: auto;
+  padding: 2px;
+  text-align: center;
+}
+
+.album-block-bottom {
+  width: 50%;
+  margin: auto;
+  padding-bottom: 50px;
+  text-align: center;
+}
+
+.album-photo {
+  height: 375px;
+  width: 25%;
+  padding: 5px;
+  margin-left: 560px;
+}
+
+/*
+Album component styles 
+*/
+
+#album-cover-art {
+  height: 450px;
+  width: 500px;
+  float: left;
+  padding: 2px;
+  margin-right: 50px;
+  margin-left: 50px;
+  margin-top: auto;
+  border: 2px white;
+}
+
+.album-details {
+  height: 50px;
+  width: 300px;
+  float: left;
+  padding: 2px;
+  margin-left: 25px;
+  border: 2px white;
+}
+
+#song-list {
+  height: 100px;
+  width: 500px;
+  padding: 2px;
+  margin-right: 100px;
+  margin-left: 100px;
+  margin-top: 50px;
+  border: 2px white;
+}
+
+/*
+Player Bar component styles
+*/
+
+.player-bar {
+  margin-top: 100px;
+  margin-right: 250px;
+  padding: 2px;
+  border: 2px white;
+}
+
+#buttons {
+  margin: auto;
+}
+
+.time-control {
+  width: 100%;
+  float: left;
+  margin-left: 50px;
+}
+
+.current-time {
+  float: left;
+}
+
+.total-time {
+  float: right;
+  margin-left: 80%;
+}
+
+#volume-control {
+  display: inline-flex;
+  margin-left: 10px;
+}
+
+#volume-low {
+  float: left;
+}
+
+#volume-high {
+  float: right;
+}
+
+.controls {
+  display: inline-flex;
+  width: 100%;
 }

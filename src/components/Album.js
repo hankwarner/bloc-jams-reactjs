@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import albumData from './../data/albums';
 import PlayerBar from './PlayerBar';
+import '../index.css';
 
 class Album extends Component {
     constructor(props) {
@@ -119,7 +120,7 @@ class Album extends Component {
     render() {        
         return (
             <section className="album">
-                <section id="album-info">
+                <section className="album-info">
                     <img id="album-cover-art" src={this.state.album.albumCover} alt={this.state.album.title} />
                     <div className="album-details">
                         <h1 id="album-title">{this.state.album.title}</h1>
@@ -153,19 +154,21 @@ class Album extends Component {
                         }
                     </tbody>
                 </table>
-                <PlayerBar 
-                    isPlaying={this.state.isPlaying} 
-                    currentSong={this.state.currentSong}
-                    currentTime={this.audioElement.currentTime}
-                    duration={this.audioElement.duration}
-                    formatTime={(time) => this.formatTime(time)}
-                    currentVolume={this.state.currentVolume}
-                    handleVolumeChange={(e) => this.handleVolumeChange(e)}
-                    handleSongClick={() => this.handleSongClick(this.state.currentSong)}
-                    handlePrevClick={() => this.handlePrevClick()}
-                    handleNextClick={() => this.handleNextClick()}
-                    handleTimeChange={(e) => this.handleTimeChange(e)}
-                />
+                <footer className="player-bar">
+                    <PlayerBar 
+                        isPlaying={this.state.isPlaying} 
+                        currentSong={this.state.currentSong}
+                        currentTime={this.audioElement.currentTime}
+                        duration={this.audioElement.duration}
+                        formatTime={(time) => this.formatTime(time)}
+                        currentVolume={this.state.currentVolume}
+                        handleVolumeChange={(e) => this.handleVolumeChange(e)}
+                        handleSongClick={() => this.handleSongClick(this.state.currentSong)}
+                        handlePrevClick={() => this.handlePrevClick()}
+                        handleNextClick={() => this.handleNextClick()}
+                        handleTimeChange={(e) => this.handleTimeChange(e)}
+                    />
+                </footer>
             </section>
         );
     }

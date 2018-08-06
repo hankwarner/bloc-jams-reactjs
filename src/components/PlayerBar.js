@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RangeStlyes from './RangeStyles';
+import '../index.css';
 
 class PlayerBar extends Component {
     constructor(props) {
@@ -20,41 +20,36 @@ class PlayerBar extends Component {
                         <span className="ion-skip-forward"></span>
                     </button>
                 </section>
-                <section id="time-control">
-                    <div className="current-time">{this.props.formatTime(this.props.currentTime)}</div>
-                    <input 
-                        type="range" 
-                        className="mdl-slider mdl-js-slider" 
-                        value={(this.props.currentTime / this.props.duration) || 0} 
-                        max="1" 
-                        min="0" 
-                        step="0.01"
-                        onChange={this.props.handleTimeChange}
-                    />   
-                    <div className="total-time">{this.props.formatTime(this.props.duration)}</div> 
-                </section>
-                <RangeStlyes>
-                    <section id="volume-control">
-                        <RangeStlyes low>
-                        <div className="icon ion-volume-low"></div>
-                        </RangeStlyes>
-                        <RangeStlyes input>
+                <div className="controls">
+                    <section class="time-control">
+                        <div className="current-time">{this.props.formatTime(this.props.currentTime)}</div>
                         <input 
                             type="range" 
                             className="mdl-slider mdl-js-slider" 
-                            value={this.props.currentVolume}
-                            max="1.0" 
-                            min="0.0"
+                            value={(this.props.currentTime / this.props.duration) || 0} 
+                            max="1" 
+                            min="0" 
                             step="0.01"
-                            onChange={this.props.handleVolumeChange}
-                        /> 
-                        </RangeStlyes>
-                        <RangeStlyes high>
-                        <div className="icon ion-volume-high"></div>
-                        </RangeStlyes>
+                            onChange={this.props.handleTimeChange}
+                        />   
+                        <div className="total-time">{this.props.formatTime(this.props.duration)}</div> 
                     </section>
-                </RangeStlyes>
+                        <section id="volume-control">
+                            <div id="volume-low" className="icon ion-volume-low"></div>
+                            <input 
+                                type="range" 
+                                className="mdl-slider mdl-js-slider" 
+                                value={this.props.currentVolume}
+                                max="1.0" 
+                                min="0.0"
+                                step="0.01"
+                                onChange={this.props.handleVolumeChange}
+                            /> 
+                            <div id="volume-high" className="icon ion-volume-high"></div>
+                        </section>
+                </div>
             </section>
+                
         );
     }
 }
