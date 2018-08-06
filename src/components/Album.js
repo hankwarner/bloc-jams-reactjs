@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import albumData from './../data/albums';
 import PlayerBar from './PlayerBar';
+import '../index.css';
 
 class Album extends Component {
     constructor(props) {
@@ -119,7 +120,7 @@ class Album extends Component {
     render() {        
         return (
             <section className="album">
-                <section id="album-info">
+                <section className="album-info">
                     <img id="album-cover-art" src={this.state.album.albumCover} alt={this.state.album.title} />
                     <div className="album-details">
                         <h1 id="album-title">{this.state.album.title}</h1>
@@ -127,7 +128,7 @@ class Album extends Component {
                         <div id="release-info">{this.state.album.releaseInfo}</div>
                     </div>
                 </section>
-                <table id="song-list">
+                <table id="song-list" className="mdl-data-table mdl-js-data-table">
                     <colgroup>
                         <col id="song-number-column" />
                         <col id="song-title-column" />
@@ -140,32 +141,34 @@ class Album extends Component {
                                 onClick={() => this.handleSongClick(song)} 
                                 onMouseEnter={() => this.setState({ hoveredSong: song })} 
                                 onMouseLeave={() => this.setState({ hoveredSong: null })}> 
-                                    <td className='song-actions'>
+                                    <td className='song-actions mdl-data-table__cell--non-numeric'>
                                             {this.state.currentSong === song ?
                                                 (<span className={this.state.isPlaying ? "ion-pause" : "ion-play"} />) :
                                                 this.state.hoveredSong === song ? (<span className="ion-play" />) :
                                                 (<span className="song-number">{index + 1}</span>)}
                                     </td>
-                                    <td className='song-title'>{song.title}</td> 
-                                    <td className='song-duration'>{this.formatTime(song.duration)}</td>
+                                    <td className='song-title mdl-data-table__cell--non-numeric'>{song.title}</td> 
+                                    <td className='song-duration mdl-data-table__cell--non-numeric'>{this.formatTime(song.duration)}</td>
                                 </tr>
                             )
                         }
                     </tbody>
                 </table>
-                <PlayerBar 
-                    isPlaying={this.state.isPlaying} 
-                    currentSong={this.state.currentSong}
-                    currentTime={this.audioElement.currentTime}
-                    duration={this.audioElement.duration}
-                    formatTime={(time) => this.formatTime(time)}
-                    currentVolume={this.state.currentVolume}
-                    handleVolumeChange={(e) => this.handleVolumeChange(e)}
-                    handleSongClick={() => this.handleSongClick(this.state.currentSong)}
-                    handlePrevClick={() => this.handlePrevClick()}
-                    handleNextClick={() => this.handleNextClick()}
-                    handleTimeChange={(e) => this.handleTimeChange(e)}
-                />
+                <footer className="player-bar">
+                    <PlayerBar 
+                        isPlaying={this.state.isPlaying} 
+                        currentSong={this.state.currentSong}
+                        currentTime={this.audioElement.currentTime}
+                        duration={this.audioElement.duration}
+                        formatTime={(time) => this.formatTime(time)}
+                        currentVolume={this.state.currentVolume}
+                        handleVolumeChange={(e) => this.handleVolumeChange(e)}
+                        handleSongClick={() => this.handleSongClick(this.state.currentSong)}
+                        handlePrevClick={() => this.handlePrevClick()}
+                        handleNextClick={() => this.handleNextClick()}
+                        handleTimeChange={(e) => this.handleTimeChange(e)}
+                    />
+                </footer>
             </section>
         );
     }
