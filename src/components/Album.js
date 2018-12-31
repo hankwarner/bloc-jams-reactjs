@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+
 import albumData from './../data/albums';
 import PlayerBar from './PlayerBar';
 
@@ -14,6 +19,9 @@ const styles = theme => ({
       padding: theme.spacing.unit * 2,
       textAlign: 'center',
       color: theme.palette.text.secondary,
+    },
+    table: {
+        minWidth: 700,
     },
 });
 
@@ -139,7 +147,7 @@ class Album extends Component {
                 <Grid container spacing={24}>
                     <Grid item xs={6}>
                         <Paper className={classes.paper}>
-                            <img style={{maxWidth: '75%', height:'auto'}} src={this.state.album.albumCover} alt={this.state.album.title} />
+                            <img style={{maxWidth: '50%', height:'auto'}} src={this.state.album.albumCover} alt={this.state.album.title} />
                             <p>{this.state.album.title}</p>
                             <p>{this.state.album.artist}</p>
                             <p>{this.state.album.releaseInfo}</p>
@@ -148,23 +156,27 @@ class Album extends Component {
 
                     <Grid item xs={6}>
                         <Paper className={classes.paper}>
-                            { 
-                                this.state.album.songs.map( (song, index) =>
-                                    <tr key={index} 
-                                    onClick={() => this.handleSongClick(song)} 
-                                    onMouseEnter={() => this.setState({ hoveredSong: song })} 
-                                    onMouseLeave={() => this.setState({ hoveredSong: null })}> 
-                                        <td>
-                                            {this.state.currentSong === song ?
-                                                (<span className={this.state.isPlaying ? "ion-pause" : "ion-play"} />) :
-                                                this.state.hoveredSong === song ? (<span className="ion-play" />) :
-                                                (<span>{index + 1}</span>)}
-                                        </td>
-                                        <td>{song.title}</td> 
-                                        <td>{this.formatTime(song.duration)}</td>
-                                    </tr>
-                                )
-                            }
+                            <Table className={classes.table}>
+                                <TableBody>
+                                    { 
+                                        this.state.album.songs.map( (song, index) =>
+                                            <TableRow key={index} 
+                                                onClick={() => this.handleSongClick(song)} 
+                                                onMouseEnter={() => this.setState({ hoveredSong: song })} 
+                                                onMouseLeave={() => this.setState({ hoveredSong: null })}> 
+                                                <TableCell align="right">
+                                                    {this.state.currentSong === song ?
+                                                        (<span className={this.state.isPlaying ? "ion-pause" : "ion-play"} />) :
+                                                        this.state.hoveredSong === song ? (<span className="ion-play" />) :
+                                                        (<span>{index + 1}</span>)}
+                                                </TableCell>
+                                                <TableCell align="right">{song.title}</TableCell> 
+                                                <TableCell align="right">{this.formatTime(song.duration)}</TableCell>
+                                            </TableRow>
+                                        )
+                                    }
+                                </TableBody>
+                            </Table>
                         </Paper>
                     </Grid>
 
