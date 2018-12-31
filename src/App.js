@@ -13,7 +13,7 @@ class App extends Component {
         <header>
           <Header />
         </header>
-        <main>
+        <main style={{paddingTop: '4%'}}>
           <Route exact path="/" component={Landing} />
           <Route path="/library" component={Library} />
           <Route path="/album/:slug" component={Album} />
