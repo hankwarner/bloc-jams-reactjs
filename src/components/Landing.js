@@ -23,7 +23,7 @@ function Landing(props) {
         <Grid container spacing={24}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-                <img src='https://www.dropbox.com/s/xpb12gq6j5cnugu/headphones.jpg?raw=1' alt='man wearing headphones' />
+                <img src='/assets/images/headphones.jpg' alt='man wearing headphones' />
                 <h2>Turn the music up!</h2>
             </Paper>
             

@@ -25,6 +25,7 @@ const styles = {
   
   function ButtonAppBar(props) {
     const { classes } = props;
+    
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -35,7 +36,6 @@ const styles = {
               Bloc Jams
             </Typography>
             <Button color="inherit" component={Link} to="/library">Library</Button>
-            
           </Toolbar>
         </AppBar>
       </div>

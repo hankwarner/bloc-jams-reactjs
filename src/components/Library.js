@@ -16,8 +16,10 @@ import albumData from './../data/albums';
 const styles = theme => ({
     card: {
         maxWidth: 345,
+        marginLeft: '20%',
+        marginRight: '20%'
     },
-        media: {
+    media: {
         height: 140,
     },
     root: {
@@ -46,7 +48,7 @@ class Library extends Component {
                         <Grid item xs={6}>
                             <Paper className={classes.paper}>
                                 <Card className={classes.card}>
-                                    <CardActionArea>
+                                    <CardActionArea component={Link} to={`/album/${album.slug}`} key={index}>
                                         <CardMedia 
                                             className={classes.media}
                                             image={album.albumCover}
@@ -57,22 +59,12 @@ class Library extends Component {
                                                 <div>{album.title}</div>
                                             </Typography>
                                             <Typography component="p">
-                                                <div>{album.title}</div>
                                                 <div>{album.artist}</div>
                                                 <div>{album.songs.length} songs</div>
                                             </Typography>
                                         </CardContent>
                                     </CardActionArea>
-                                    <CardActions>
-                                        <Button size="small" color="primary">
-                                            Listen
-                                        </Button>
-                                    </CardActions>
                                 </Card>
-                                
-                                <Link to={`/album/${album.slug}`} key={index}>
-                                </Link>
-
                             </Paper>
                         </Grid>
                     )
