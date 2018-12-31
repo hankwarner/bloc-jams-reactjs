@@ -65,7 +65,7 @@ class PlayerBar extends Component {
                     onChange={this.props.handleTimeChange}
                 /> 
 
-                {this.props.formatTime(this.props.duration)}
+            {this.props.formatTime(this.props.duration)}
         
             </div>     
         );
