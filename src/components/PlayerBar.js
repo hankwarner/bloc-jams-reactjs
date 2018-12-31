@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Slider from '@material-ui/lab/Slider';
-import Typography from '@material-ui/core/Typography';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import Icon from '@material-ui/core/Icon';
 
-const styles = theme => ({
+const styles = {
     root: {
-      flexGrow: 1,
+      width: 500,
     },
-    paper: {
-      padding: theme.spacing.unit * 2,
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    }
-});
+  };
 
 class PlayerBar extends Component {
     render() {
@@ -23,55 +17,57 @@ class PlayerBar extends Component {
 
         return (
             <div>
-                <Grid container spacing={24}>
-                    <Grid item xs={6}>
-                        <Paper className={classes.paper}>
+            <BottomNavigation>
+                <BottomNavigationAction
+                    label="Previous"
+                    onClick={this.props.handlePrevClick}
+                    className="ion-skip-backward mdl-js-ripple-effect"
+                />
+                <BottomNavigationAction
+                    label="Play"
+                    onClick={this.props.handleSongClick}
+                    className={this.props.isPlaying ? "ion-pause" : "ion-play" }
+                />
+                <BottomNavigationAction
+                    label="Next"
+                    onClick={this.props.handleNextClick}
+                    className="ion-skip-forward"
+                />
+                <BottomNavigationAction
+                    label="Low"
+                    className="icon ion-volume-low"
+                />
+                <BottomNavigationAction
+                    label="Volume"
+                    type="range"
+                    className="mdl-slider mdl-js-slider"
+                    value={this.props.currentVolume}
+                    max="1.0" 
+                    min="0.0"
+                    step="0.01"
+                    onChange={this.props.handleVolumeChange}
+                />
+                <BottomNavigationAction
+                    label="High"
+                    className="icon ion-volume-high"
+                />
+            </BottomNavigation>                     
+                
+            {this.props.formatTime(this.props.currentTime)}
+                
+                <input 
+                    type="range" 
+                    className="mdl-slider mdl-js-slider" 
+                    value={(this.props.currentTime / this.props.duration) || 0} 
+                    max="1" 
+                    min="0" 
+                    step="0.01"
+                    onChange={this.props.handleTimeChange}
+                /> 
 
-                            <button onClick={this.props.handlePrevClick} >
-                                <span className="ion-skip-backward mdl-js-ripple-effect"></span>
-                            </button>
-                            <button onClick={this.props.handleSongClick} >
-                                <span className={this.props.isPlaying ? "ion-pause" : "ion-play" }></span>
-                            </button>
-                            <button onClick={this.props.handleNextClick} >
-                                <span className="ion-skip-forward"></span>
-                            </button>
-
-                            <div>
-                                {this.props.formatTime(this.props.currentTime)}
-                            
-                                <input 
-                                    type="range" 
-                                    className="mdl-slider mdl-js-slider" 
-                                    value={(this.props.currentTime / this.props.duration) || 0} 
-                                    max="1" 
-                                    min="0" 
-                                    step="0.01"
-                                    onChange={this.props.handleTimeChange}
-                                /> 
-
-                                {this.props.formatTime(this.props.duration)}
-                            </div>
-                        </Paper>
-                    </Grid>
-
-                    <Grid item xs={6}>
-                        <Paper className={classes.paper}>
-                            <div className="icon ion-volume-low"></div>
-                            <input 
-                                className="mdl-slider mdl-js-slider"
-                                type="range" 
-                                value={this.props.currentVolume}
-                                max="1.0" 
-                                min="0.0"
-                                step="0.01"
-                                onChange={this.props.handleVolumeChange}
-                            /> 
-                            <div className="icon ion-volume-high"></div>
-                        </Paper>
-                    </Grid>
-                </Grid>
-            </div>            
+                {this.props.formatTime(this.props.duration)}
+        
+            </div>     
         );
     }
 }
