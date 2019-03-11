@@ -4,7 +4,7 @@ Bloc Jams is an SPA (single-page application), a music player, built from the gr
 
 ## Getting Started
 
-This app is hosted on Heroku and can be found [here](https://hankwarner-blocjams.herokuapp.com/ "Bloc Jams Homepage").
+This app is hosted on Heroku and can be found [here](https://bloc-jams-reactjs.netlify.com/ "Bloc Jams Homepage").
 
 
 ### View Album Library
